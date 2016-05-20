@@ -108,6 +108,7 @@ def save_segmented_img(filepath):
     fig, ax = plt.subplots(1,1, figsize=(12, 16))
 
     im = plt.imread(filepath)
+    plt.imshow(im)
     
     coords, probs = scan_image(im)
 
@@ -130,13 +131,7 @@ def save_segmented_img(filepath):
         ))
         ax.annotate(str(prob.argmax()), xy=(coord[0], coord[1]))
 
-
-    im = plt.imread(filepath)
-    plt.imshow(im)
-
     table = tableizer(coords, probs)
- 
-
     path = "static/" + str(uuid.uuid4()) + ".png"
     fig.savefig(path, bbox_inches='tight')
     return path, table
